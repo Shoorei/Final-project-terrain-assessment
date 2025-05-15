@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="assessment_start_color">#8269FF</color>
+    <color name="assessment_stop_color">#FF4444</color>
+</resources>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "197718631709",
+    "project_id": "mpu6050-finalthesis-logger",
+    "storage_bucket": "mpu6050-finalthesis-logger.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:197718631709:android:aa9a0a888518f9f0a36df4",
+        "android_client_info": {
+          "package_name": "com.example.controlapprobot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-8kxJZms9l3M23B8qtK2NtDu-pGwjEL8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

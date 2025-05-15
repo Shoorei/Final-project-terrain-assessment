@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/app2">
+
+    <!-- Các nút -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="top"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:weightSum="3">
+
+        <Button
+            android:id="@+id/buttonReturn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|start"
+            android:layout_marginTop="2dp"
+            android:backgroundTint="#F6697E"
+            android:elevation="8dp"
+            android:text="Quay lại"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/buttonDeleteAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="2dp"
+            android:backgroundTint="#D32F2F"
+            android:elevation="8dp"
+            android:text="Xóa hết"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonToggleLog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="Xem đánh giá"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="8dp"
+        android:backgroundTint="#8269FF"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="64dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp">
+
+        <!-- Dữ liệu cảm biến -->
+        <TableLayout
+            android:id="@+id/tableHeaderSensor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*">
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/cell_border"
+                    android:padding="8dp"
+                    android:text="Timestamp"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="AccelX"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/cell_border"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="AccelY"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/cell_border"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="AccelZ"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/cell_border"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="GyroX"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/cell_border"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="GyroY"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/cell_border"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="GyroZ"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/cell_border"
+                    android:padding="8dp" />
+            </TableRow>
+        </TableLayout>
+
+        <!-- Đánh giá -->
+        <TableLayout
+            android:id="@+id/tableHeaderAssessment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*"
+            android:visibility="gone">
+
+            <TableRow>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Timestamp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/cell_border"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Góc dọc"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/cell_border"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Góc ngang"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/cell_border"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Chỉ số gồ ghề"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/cell_border"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Độ gồ ghề"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/cell_border"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Kết luận"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/cell_border"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Số lượt đo"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/cell_border"
+                    android:padding="8dp" />
+            </TableRow>
+        </TableLayout>
+
+
+        <!-- Bảng dữ liệu -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TableLayout
+                android:id="@+id/tableData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="*"/>
+
+        </ScrollView>
+
+
+    </LinearLayout>
+</FrameLayout>
