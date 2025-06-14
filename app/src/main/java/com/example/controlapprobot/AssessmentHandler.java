@@ -151,9 +151,9 @@ public class AssessmentHandler {
     }
 
     private String getRoughnessCategory(float index) {
-        if (index < 0.2) return "Không gồ ghề";
-        else if (index < 0.4) return "Gồ ghề nhẹ";
-        else if (index < 0.7) return "Khá gồ ghề";
+        if (index < 0.3) return "Không gồ ghề";
+        else if (index < 0.6) return "Hơi gồ ghề";
+        else if (index < 0.9) return "Khá gồ ghề";
         else return "Rất gồ ghề";
     }
 

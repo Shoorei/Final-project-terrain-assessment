@@ -53,22 +53,18 @@ public class ButtonController {
 
         btnStartAssessment.setOnClickListener(v -> {
             if (assessmentHandler.isAssessing()) {
-                // Cancel assessment
                 assessmentHandler.cancelAssessment();
                 btnStartAssessment.setText("Bắt đầu đánh giá");
                 int startColor = ContextCompat.getColor(context, R.color.assessment_start_color);
                 btnStartAssessment.setBackgroundTintList(ColorStateList.valueOf(startColor));
 
-                // Notify MainActivity to restore previous result
                 listener.onAssessmentCancelled();
             } else {
-                // Start new assessment
                 assessmentHandler.startAssessment();
                 btnStartAssessment.setText("Hủy");
                 int stopColor = ContextCompat.getColor(context, R.color.assessment_stop_color);
                 btnStartAssessment.setBackgroundTintList(ColorStateList.valueOf(stopColor));
 
-                // ✅ Wrap the original listener to avoid overwriting MainActivity’s logic
                 AssessmentHandler.OnAssessmentCompleteListener originalListener = assessmentHandler.getListener();
 
                 assessmentHandler.setAssessmentListener(result -> {
@@ -81,7 +77,6 @@ public class ButtonController {
                         btnStartAssessment.setBackgroundTintList(ColorStateList.valueOf(startColor));
                     });
 
-                    // ✅ Forward the result to the original listener (e.g., MainActivity)
                     if (originalListener != null) {
                         originalListener.onComplete(result);
                     }
