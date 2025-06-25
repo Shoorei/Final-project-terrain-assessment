@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int PACKET_SIZE = 2000;
     private static final int MAX_ASSESSMENT_COUNT = 10;
     private static final long UPDATE_INTERVAL_MS = 100;
-    private String esp32IPAddress = "192.168.233.222";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(() -> uiUpdater.showAssessmentProgress(current, max))
         );
 
-
         // Find views
         TextView accelerationXTextView = findViewById(R.id.accelerationXTextView);
         TextView accelerationYTextView = findViewById(R.id.accelerationYTextView);
@@ -61,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
         TextView assessmentResultTextView = findViewById(R.id.assessmentResultTextView);
         Spinner spinnerAssessmentCount = findViewById(R.id.spinnerAssessmentCount);
 
-        // Spinner để chọn số lần đánh giá
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.assessment_count_options,
@@ -71,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
         spinnerAssessmentCount.setAdapter(adapter);
         spinnerAssessmentCount.setSelection(0);
 
-        // Lắng nghe option change
         spinnerAssessmentCount.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -84,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
-
         uiUpdater = new UIUpdater(
                 this,
                 accelerationXTextView, accelerationYTextView, accelerationZTextView,
@@ -95,9 +90,8 @@ public class MainActivity extends AppCompatActivity {
                 assessmentResultTextView
         );
 
-        udpService = new UDPService(esp32IPAddress, UDP_PORT_SEND, UDP_PORT_RECEIVE, PACKET_SIZE);
+        udpService = new UDPService(UDP_PORT_SEND, UDP_PORT_RECEIVE, PACKET_SIZE);
         udpService.setListener(data -> {
-            // Nhận dữ liệu cảm biến từ esp32, format giống hệt chuỗi or nothing
             int[] indices = findIndices(data,"Acceleration: X=", " Y=", " Z="," Gyro X=", " Y=", " Z=");
             if (indices != null) {
                 final String acceleration_x = getSubstring(data, indices[0] + 16, indices[1]);
@@ -119,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
                                 );
                             } catch (NumberFormatException ignored) {}
                         }
-
                 ));
                 assessmentHandler.handleSensorData(
                         Float.parseFloat(acceleration_x),
@@ -129,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Các nút bấm
+        // Control buttons
         ImageButton btn_ahead = findViewById(R.id.tien);
         ImageButton btn_back = findViewById(R.id.lui);
         ImageButton btn_left = findViewById(R.id.trai);
@@ -137,9 +130,7 @@ public class MainActivity extends AppCompatActivity {
         Button buttonSwitchScene = findViewById(R.id.buttonSwitchScene);
         Button btnStartAssessment = findViewById(R.id.btnStartAssessment);
 
-        btnStartAssessment.setOnClickListener(v -> {
-            assessmentHandler.startAssessment();
-        });
+        btnStartAssessment.setOnClickListener(v -> assessmentHandler.startAssessment());
 
         assessmentHandler.setAssessmentListener(result -> {
             runOnUiThread(() -> uiUpdater.showAssessmentResult(result));
@@ -154,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onCommand(String command) {
                         udpService.sendCommand(command);
+                        Log.d("ButtonEvent", "Sending command: " + command);
                     }
 
                     @Override
@@ -177,32 +169,26 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-
         assessmentHandler.setMaxAssessmentCount(10);
-
         udpService.startReceiving();
-
         assessmentHandler.getSavedAssessmentResult();
 
-        // MOOOOOOOSIC
+        // Music service
         Intent musicIntent = new Intent(this, MusicService.class);
         startService(musicIntent);
     }
 
-    // Life cycle callback
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Intent musicIntent = new Intent(this, MusicService.class);
-        stopService(musicIntent);
+        stopService(new Intent(this, MusicService.class));
         udpService.shutdown();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Intent musicIntent = new Intent(this, MusicService.class);
-        startService(musicIntent);
+        startService(new Intent(this, MusicService.class));
         udpService.startReceiving();
     }
 
@@ -212,7 +198,6 @@ public class MainActivity extends AppCompatActivity {
         udpService.stopReceiving();
     }
 
-    //Immersive focused window mode, giấu thanh taskbar
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -228,7 +213,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Method helper để phân tích chỉ số
     private int[] findIndices(String data, String... substrings) {
         int[] indices = new int[substrings.length];
         int startIndex = 0;
@@ -239,12 +223,10 @@ public class MainActivity extends AppCompatActivity {
         }
         return indices;
     }
-    // Method helper để lấy chuỗi con
+
     private String getSubstring(String data, int startIndex, int endIndex) {
         if (startIndex >= 0 && endIndex >= 0 && endIndex <= data.length())
             return data.substring(startIndex, endIndex);
         else return "";
     }
 }
-
-

@@ -133,9 +133,9 @@ public class AssessmentHandler {
 
     private String getTerrainType(float pitch, float roll) {
         float maxAngle = Math.max(Math.abs(pitch), Math.abs(roll));
-        if (maxAngle < 10) return "Bằng phẳng";
-        else if (maxAngle < 15) return "Dốc nhẹ";
-        else if (maxAngle < 25) return "Dốc vừa";
+        if (maxAngle < 5) return "Bằng phẳng";
+        else if (maxAngle < 10) return "Dốc nhẹ";
+        else if (maxAngle < 15) return "Dốc vừa";
         else return "Dốc nhiều";
     }
 

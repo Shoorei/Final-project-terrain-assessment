@@ -3,6 +3,7 @@ package com.example.controlapprobot;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -29,10 +30,16 @@ public class ButtonController {
         this.context = context;
 
         btnAhead.setOnTouchListener((view, event) -> {
-            if (event.getAction() == MotionEvent.ACTION_DOWN) listener.onCommand("F");
-            else if (event.getAction() == MotionEvent.ACTION_UP) listener.onCommand("S");
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                Log.d("ButtonController", "Button AHEAD pressed");
+                listener.onCommand("F");
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                Log.d("ButtonController", "Button AHEAD released");
+                listener.onCommand("S");
+            }
             return true;
         });
+
         btnBack.setOnTouchListener((view, event) -> {
             if (event.getAction() == MotionEvent.ACTION_DOWN) listener.onCommand("B");
             else if (event.getAction() == MotionEvent.ACTION_UP) listener.onCommand("S");

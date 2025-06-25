@@ -119,8 +119,6 @@ public class UIUpdater {
                     motionPathChart.getData().notifyDataChanged();
                     motionPathChart.notifyDataSetChanged();
                     motionPathChart.invalidate();
-                } else {
-                    Log.w("MotionChart", "Skipped invalid motion path point: " + pos[0] + ", " + pos[1]);
                 }
             }
         } catch (NumberFormatException e) {
